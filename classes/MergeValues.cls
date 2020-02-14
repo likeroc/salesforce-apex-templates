@@ -13,10 +13,6 @@ public with sharing class MergeValues {
     public MergeValues() {
     }
 
-    /**
-     * 合并值
-     * @param  values     [description]
-     */
     public MergeValues(Map<String,Object> values) {
         this();
         putAll(values);
