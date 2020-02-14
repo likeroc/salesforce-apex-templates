@@ -13,6 +13,10 @@ public with sharing class MergeValues {
     public MergeValues() {
     }
 
+    /**
+     * 合并值
+     * @param  values     [description]
+     */
     public MergeValues(Map<String,Object> values) {
         this();
         putAll(values);
@@ -22,6 +26,10 @@ public with sharing class MergeValues {
         values.put(key, o);
     }
 
+    /**
+     * SObject的Name添加到Map<String,Object>集合里
+     * @param  o          SObject
+     */
     public void put(SObject o) {
         String objectName = o.getSObjectType().getDescribe().getName();
         values.put(objectName, o);
@@ -36,6 +44,7 @@ public with sharing class MergeValues {
             'SELECT ' + String.join(new List<String>(registeredFields.get(sobjectTypeName)), ',')
             + ' FROM ' + sobjectTypeName
             + ' WHERE id = :sobjectId';
+
         SObject[] results = Database.query(query);
         if(!results.isEmpty()) {
             values.put(sobjectTypeName, results[0]);
@@ -46,8 +55,15 @@ public with sharing class MergeValues {
         values.putAll(topLevelValues);
     }
 
+    /**
+     * 表达式：SObject.Field。 通过表达式获取该变量值
+     * @param  path       String。表达式，例如：Case.Subject
+     * @return            Object。表达式对应的值
+     */
     public Object get(String path) {
-        String[] atoms = path.split('\\s*\\.\\s*');
+
+        String[] atoms = path.split('\\s*\\.\\s*');//通过'.'来截取字符串
+
         Object currentValue = values;
         for(Integer i = 0, size = atoms.size(); i < size; i++) {
             currentValue = getProperty(currentValue, atoms[i], i < size - 1);
@@ -85,7 +101,15 @@ public with sharing class MergeValues {
         }
     }
 
+    /**
+     * 获取property的值
+     * @param  o               Object
+     * @param  property        String. 对象或者字段的API Name
+     * @param  isInnerProperty Boolean. 
+     * @return                 对象或者字段的实例
+     */
     private static Object getProperty(Object o, String property, Boolean isInnerProperty) {
+
         if(o == null) {
             return null;
         }
@@ -96,9 +120,9 @@ public with sharing class MergeValues {
 
         if(o instanceof SObject) {
             if(isInnerProperty) {
-                return ((SObject)o).getSObject(property);
+                return ((SObject)o).getSObject(property);//SObject.getSObject(String field). 返回该字段的值
             }
-            return ((SObject)o).get(property);
+            return ((SObject)o).get(property);//
         }
 
         return null;
