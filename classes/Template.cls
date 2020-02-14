@@ -64,11 +64,6 @@ public class Template {
         return evaluate(values);
     }
 
-    /**
-     * 针对有多个对象表达式的字符串，获取最终整合后的字符串
-     * @param  values     [description]
-     * @return            String. 最终整合后的字符串
-     */
     public String evaluate(Map<String, Object> values) {
         return evaluate(new MergeValues(values));
     }
@@ -102,12 +97,12 @@ public class Template {
         Matcher contentMatcher = MERGE_FIELD_PATTERN.matcher(content);
 
         Integer processedEnd = 0;
-        while(contentMatcher.find()) {//???? 
+        while(contentMatcher.find()) {
             if(processedEnd < contentMatcher.start()) {
                 lexems.add(content.substring(processedEnd, contentMatcher.start()));
             }
 
-            Gap gapLexem = new Gap(contentMatcher.group(1));//contentMatcher.group(1) = Case.Subject //????
+            Gap gapLexem = new Gap(contentMatcher.group(1));//contentMatcher.group(1) = Case.Subject 
             lexems.add(gapLexem); 
  
             processedEnd = contentMatcher.end(); 
