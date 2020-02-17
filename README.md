@@ -18,3 +18,9 @@ new Template(
   'A message for {!Case.Subject}.'
 ).evaluate(someCase);
 ```
+
+
+```javascript
+Case someCase = new Case(Subject = 'Test Case2333', Description = 'dsc text');
+String msg = Template.fromEmailTemplate('CaseEmailTemplete').evaluate(someCase);
+```
