@@ -22,5 +22,6 @@ new Template(
 
 ```javascript
 Case someCase = new Case(Subject = 'Test Case2333', Description = 'dsc text');
+//CaseEmailTemplete is a text email templete
 String msg = Template.fromEmailTemplate('CaseEmailTemplete').evaluate(someCase);
 ```
