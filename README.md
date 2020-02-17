@@ -24,5 +24,6 @@ new Template(
 Case someCase = new Case(Subject = 'Test Case2333', Description = 'dsc text');
 //CaseEmailTemplete is a text email templete,
 //which content is "Subject is {!Case.Subject};Description is : {!Case.Description} ."
+//The below wiil return "Subject is Test Case2333;Description is : dsc text ."
 String msg = Template.fromEmailTemplate('CaseEmailTemplete').evaluate(someCase);
 ```
