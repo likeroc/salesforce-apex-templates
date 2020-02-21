@@ -1,14 +1,15 @@
 salesforce-apex-templates
 =========================
 
-APEX Templates provide a simple template engine, similar to the standard Salesforce mail merge one. Its aim is to generate messages and emails directly from APEX, for provided SObjects or maps of values.
+APEX模板提供了一个简单的模板引擎，类似于标准的Salesforce邮件合并引擎。 它的目的是直接从APEX中为提供的SObjects或值映射生成消息和电子邮件。
 
-Basic usage
+基本用法
 -----------
 
-The below snippet demonstrates the most basic usage of APEX Templates:
+以下代码段演示了APEX模板的最基本用法：
 
-```javascript
+用法1:
+```java
 Case someCase = new Case(
   Subject = 'Test Case'
 );
@@ -19,8 +20,8 @@ new Template(
 ).evaluate(someCase);
 ```
 
-
-```javascript
+用法2:
+```java
 Case someCase = new Case(Subject = 'Test Case2333', Description = 'dsc text');
 //CaseEmailTemplete is a text email templete,
 //which content is "Subject is {!Case.Subject};Description is : {!Case.Description} ."
